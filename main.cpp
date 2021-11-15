@@ -64,6 +64,7 @@ void StartIntro();
 int main()
 {
     ChoseCharacter();
+    std::cout << "Press enter to continue..." << std::endl;
     std::cin.ignore();
     std::cin.get();
     system("clear");
