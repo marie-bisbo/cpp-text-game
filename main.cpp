@@ -1,3 +1,5 @@
+#include "game_elements.h"
+#include "character.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,69 +9,11 @@ void Wait()
     std::cin.ignore();
     std::cin.get();
 }
+
 enum class CharacterType 
 {
     Fighter,
     Mage
-};
-
-struct Item
-{
-    std::string name;
-    std::string description;
-};
-
-struct Spell
-{
-};
-
-class Character
-{
-protected:
-    std::string m_Name;
-    std::vector<Item> m_Inventory;
-    Item m_Weapon;
-
-public:
-    Character();
-
-    Character(std::string name, std::vector<Item> inventory, Item weapon)
-        : m_Name(name), m_Inventory(inventory), m_Weapon(weapon)
-    {
-        m_Inventory.reserve(10);
-        m_Inventory.push_back(weapon);
-    }
-
-    void PrintInventory() const
-    {
-        for (auto& item : m_Inventory)
-        {
-            std::cout << "[" << item.name << ": " << item.description << "]" << std::endl;
-        }
-    }
-};
-
-class Fighter : public Character
-{
-public:
-    Fighter(std::string name, std::vector<Item> inventory, Item weapon) 
-        : Character(name, inventory, weapon)
-    {
-        std::cout << "I am a Fighter!" << std::endl;
-    }
-};
-
-class Mage : public Character
-{
-private:
-    std::vector<Spell> m_Spells;
-
-public:
-    Mage(std::string name, std::vector<Item> inventory, Item weapon, std::vector<Spell> spells)
-        : Character(name, inventory, weapon), m_Spells(spells)
-    {
-        std::cout << "I am a Mage!" << std::endl;
-    }
 };
 
 Character* character;
