@@ -59,10 +59,15 @@ public:
 
 
 void ChoseCharacter();
+void StartIntro();
 
 int main()
 {
     ChoseCharacter();
+    std::cin.ignore();
+    std::cin.get();
+    system("clear");
+    StartIntro();
 
     return 0;
 }
@@ -71,11 +76,11 @@ void ChoseCharacter()
 {
     CharacterType chosenCharacter;
     bool hasChosenCharacter = false;
+    std::cout << "Choose a character type" << std::endl;
+    std::cout << "[" << static_cast<int>(CharacterType::Fighter) << "] Fighter" << std::endl;
+    std::cout << "[" << static_cast<int>(CharacterType::Mage) << "] Mage" << std::endl;
     while (!hasChosenCharacter)
     {
-        std::cout << "Choose a character type" << std::endl;
-        std::cout << "[" << static_cast<int>(CharacterType::Fighter) << "] Fighter" << std::endl;
-        std::cout << "[" << static_cast<int>(CharacterType::Mage) << "] Mage" << std::endl;
         int characterChoice;
         std::cin >> characterChoice;
         switch (characterChoice)
@@ -99,4 +104,9 @@ void ChoseCharacter()
         character = new Fighter("Bob", std::vector<Item>(), Item());
     if (chosenCharacter == CharacterType::Mage)
         character = new Mage("Alice", std::vector<Item>(), Item(), std::vector<Spell>());
+}
+
+void StartIntro()
+{
+    std::cout << "You have just woken up. Your memory of recent events is gone. You stand before a great castle..." << std::endl;
 }
