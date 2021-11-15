@@ -2,6 +2,11 @@
 #include <string>
 #include <vector>
 
+void Wait()
+{
+    std::cin.ignore();
+    std::cin.get();
+}
 enum class CharacterType 
 {
     Fighter,
@@ -10,6 +15,8 @@ enum class CharacterType
 
 struct Item
 {
+    std::string name;
+    std::string description;
 };
 
 struct Spell
@@ -31,6 +38,14 @@ public:
     {
         m_Inventory.reserve(10);
         m_Inventory.push_back(weapon);
+    }
+
+    void PrintInventory() const
+    {
+        for (auto& item : m_Inventory)
+        {
+            std::cout << "[" << item.name << ": " << item.description << "]" << std::endl;
+        }
     }
 };
 
@@ -57,6 +72,7 @@ public:
     }
 };
 
+Character* character;
 
 void ChoseCharacter();
 void StartIntro();
@@ -65,10 +81,12 @@ int main()
 {
     ChoseCharacter();
     std::cout << "Press enter to continue..." << std::endl;
-    std::cin.ignore();
-    std::cin.get();
+    Wait();
     system("clear");
     StartIntro();
+    Wait();
+    std::cout << "Your current items are: \n" << std::endl;
+    character->PrintInventory();
 
     return 0;
 }
@@ -100,11 +118,12 @@ void ChoseCharacter()
                 std::cout << "You did not chose a valid character type" << std::endl;
         }
     }
-    Character* character;
+    Item sword = Item{"Sword", "A trusty friend in battle"};
+    Item staff = Item{"Staff", "Great for casting spells, or a good thwack on the head"};
     if (chosenCharacter == CharacterType::Fighter)
-        character = new Fighter("Bob", std::vector<Item>(), Item());
+        character = new Fighter("Bob", std::vector<Item>(), sword);
     if (chosenCharacter == CharacterType::Mage)
-        character = new Mage("Alice", std::vector<Item>(), Item(), std::vector<Spell>());
+        character = new Mage("Alice", std::vector<Item>(), staff, std::vector<Spell>());
 }
 
 void StartIntro()
