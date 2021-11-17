@@ -11,13 +11,6 @@ Character::Character(std::string name, std::vector<Item> inventory, Item weapon)
         m_Inventory.push_back(weapon);
     }
 
-void Character::PrintInventory() const 
-{
-    for (const Item& item : m_Inventory)
-    {
-        std::cout << "[" << item.name << ": " << item.description << "]" << std::endl;
-    }
-}
 
 Fighter::Fighter(std::string name, std::vector<Item> inventory, Item weapon) 
     : Character(name, inventory, weapon)
