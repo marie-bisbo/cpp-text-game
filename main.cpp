@@ -13,7 +13,6 @@ int main()
     system("clear");
     Game::StartIntro();
     Game::Wait();
-    std::cout << "Your current items are: \n" << std::endl;
 
     return 0;
 }

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#define OUT 
+
 namespace Game{
 
     struct PlayerInfo;
@@ -31,7 +33,7 @@ namespace Game{
         Mage
     };
 
-    PlayerInfo ChoseCharacter(PlayerInfo playerInfo)
+    void ChoseCharacter(OUT PlayerInfo& playerInfo)
     {
         CharacterType chosenCharacter;
         bool hasChosenCharacter = false;
@@ -65,8 +67,9 @@ namespace Game{
             character = new Fighter("Bob", std::vector<Item>(), sword);
         if (chosenCharacter == CharacterType::Mage)
             character = new Mage("Alice", std::vector<Item>(), staff, std::vector<Spell>());
-        
-        return PlayerInfo{chosenCharacter, character};
+
+        playerInfo.characterType = chosenCharacter;
+        playerInfo.character = character;
     }
 
     void StartIntro()
