@@ -15,11 +15,11 @@ Character::Character(std::string name, std::vector<Item> inventory, Item weapon)
 Fighter::Fighter(std::string name, std::vector<Item> inventory, Item weapon) 
     : Character(name, inventory, weapon)
 {
-    std::cout << "I am a Fighter!" << std::endl;
+    std::cout << "I am a Fighter!\n";
 }
 
 Mage::Mage(std::string name, std::vector<Item> inventory, Item weapon, std::vector<Spell> spells)
     : Character(name, inventory, weapon), m_Spells(spells)
 {
-    std::cout << "I am a Mage!" << std::endl;
+    std::cout << "I am a Mage!\n";
 }

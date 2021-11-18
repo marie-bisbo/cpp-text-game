@@ -7,8 +7,22 @@
 #include <vector>
 #include <map>
 
+#define OUT
 
-
+void MoveToRoom(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerController controller)
+{
+    int playerChoice;
+    std::cin >> playerChoice;
+    if (rooms.find(playerChoice) != rooms.end())
+    {
+        controller.currentRoom = rooms.at(playerChoice);
+        std::cout << "You are in the " << controller.currentRoom->name << ".\n";
+    }
+    else
+    {
+        std::cout << "You did not choose a valid room\n";
+    }
+}
 
 int main()
 {
@@ -19,21 +33,11 @@ int main()
     Game::StartIntro();
     Game::Wait();
     playerController.currentRoom = &Map::foyer;
-    std::cout << "You are in the " << playerController.currentRoom->name << "." << std::endl;
-    std::cout << "Where would you like to go next?" << std::endl;
+    std::cout << "You are in the " << playerController.currentRoom->name << ".\n";
+    std::cout << "Where would you like to go next?\n";
     std::map<int, Game::Room*> rooms = Game::GetAvailableRooms(playerController);
     Game::PrintAvailableRooms(rooms);
-    int playerChoice;
-    std::cin >> playerChoice;
-    if (rooms.find(playerChoice) != rooms.end())
-    {
-        playerController.currentRoom = rooms[playerChoice];
-        std::cout << "You are in the " << playerController.currentRoom->name << "." << std::endl;
-    }
-    else
-    {
-        std::cout << "You did not choose a valid room" << std::endl;
-    }
+    MoveToRoom(rooms, playerController);
     Game::Wait();
         
 

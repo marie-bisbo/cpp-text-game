@@ -46,13 +46,13 @@ namespace Game{
     {
         for (auto const& [index, room] : availableRooms)
         {
-            std::cout << "[" << index << "] " << room->name << std::endl;
+            std::cout << "[" << index << "] " << room->name << '\n';
         }
     }
 
     void Wait()
     {
-        std::cout << "Press enter to continue..." << std::endl;
+        std::cout << "Press enter to continue...\n";
         std::cin.ignore();
         std::cin.get();
     }
@@ -67,9 +67,9 @@ namespace Game{
     {
         CharacterType chosenCharacter;
         bool hasChosenCharacter = false;
-        std::cout << "Choose a character type" << std::endl;
-        std::cout << "[" << static_cast<int>(CharacterType::Fighter) << "] Fighter" << std::endl;
-        std::cout << "[" << static_cast<int>(CharacterType::Mage) << "] Mage" << std::endl;
+        std::cout << "Choose a character type\n";
+        std::cout << "[" << static_cast<int>(CharacterType::Fighter) << "] Fighter\n";
+        std::cout << "[" << static_cast<int>(CharacterType::Mage) << "] Mage\n";
         while (!hasChosenCharacter)
         {
             int characterChoice;
@@ -77,17 +77,17 @@ namespace Game{
             switch (characterChoice)
             {
                 case 0:
-                    std::cout << "You chose to be a Fighter" << std::endl;
+                    std::cout << "You chose to be a Fighter\n";
                     chosenCharacter = CharacterType::Fighter;
                     hasChosenCharacter = true;
                     break;
                 case 1:
-                    std::cout << "You chose to be a Mage" << std::endl;
+                    std::cout << "You chose to be a Mage\n";
                     chosenCharacter = CharacterType::Mage;
                     hasChosenCharacter = true;
                     break;
                 default:
-                    std::cout << "You did not chose a valid character type" << std::endl;
+                    std::cout << "You did not chose a valid character type\n";
             }
         }
         Item sword = Item{"Sword", "A trusty friend in battle"};
@@ -104,6 +104,6 @@ namespace Game{
 
     void StartIntro()
     {
-        std::cout << "You have just woken up. Your memory of recent events is gone. You stand before a great castle..." << std::endl;
+        std::cout << "You have just woken up. Your memory of recent events is gone. You stand before a great castle...\n";
     }
 }
