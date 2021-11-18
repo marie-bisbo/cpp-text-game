@@ -3,6 +3,7 @@
 #include "character.h"
 #include <iostream>
 #include <string>
+#include <map>
 
 #define OUT 
 
@@ -14,6 +15,8 @@ namespace Game{
     CharacterType ChoseCharacter();
     void StartIntro();
     struct Room;
+    std::map<int, Game::Room*> GetAvailableRooms();
+    void PrintAvailableRooms();
 
     struct Room
     {
@@ -28,6 +31,24 @@ namespace Game{
         Character* character;
         Room* currentRoom;
     };
+    std::map<int, Game::Room*> GetAvailableRooms(const Game::PlayerController& controller)
+    {
+        std::map<int, Game::Room*> roomOptions;
+        for (size_t i = 0; i < controller.currentRoom->adjoiningRooms.size(); ++i)
+        {
+            roomOptions[i] = controller.currentRoom->adjoiningRooms[i];
+        }
+
+        return roomOptions;
+    }
+
+    void PrintAvailableRooms(const std::map<int, Game::Room*>& availableRooms)
+    {
+        for (auto const& [index, room] : availableRooms)
+        {
+            std::cout << "[" << index << "] " << room->name << std::endl;
+        }
+    }
 
     void Wait()
     {
