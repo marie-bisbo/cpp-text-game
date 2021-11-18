@@ -8,16 +8,25 @@
 
 namespace Game{
 
-    struct PlayerInfo;
+    struct PlayerController;
     void Wait();
     enum class CharacterType;
     CharacterType ChoseCharacter();
     void StartIntro();
+    struct Room;
 
-    struct PlayerInfo
+    struct Room
+    {
+        std::string name;
+        std::vector<Item> items;
+        std::vector<Room*> adjoiningRooms;
+    };
+
+    struct PlayerController
     {
         CharacterType characterType;
         Character* character;
+        Room* currentRoom;
     };
 
     void Wait()
@@ -33,7 +42,7 @@ namespace Game{
         Mage
     };
 
-    void ChoseCharacter(OUT PlayerInfo& playerInfo)
+    void ChoseCharacter(OUT PlayerController& playerController)
     {
         CharacterType chosenCharacter;
         bool hasChosenCharacter = false;
@@ -68,8 +77,8 @@ namespace Game{
         if (chosenCharacter == CharacterType::Mage)
             character = new Mage("Alice", std::vector<Item>(), staff, std::vector<Spell>());
 
-        playerInfo.characterType = chosenCharacter;
-        playerInfo.character = character;
+        playerController.characterType = chosenCharacter;
+        playerController.character = character;
     }
 
     void StartIntro()
