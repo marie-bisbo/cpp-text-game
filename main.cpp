@@ -8,6 +8,18 @@
 #include <map>
 
 
+std::map<int, Game::Room*> GetAvailableRooms(const Game::PlayerController& controller)
+{
+    std::map<int, Game::Room*> roomOptions;
+    for (size_t i = 0; i < controller.currentRoom->adjoiningRooms.size(); ++i)
+    {
+        roomOptions[i] = controller.currentRoom->adjoiningRooms[i];
+        std::cout << "[" << i << "] " << controller.currentRoom->adjoiningRooms[i]->name << std::endl;
+    }
+
+    return roomOptions;
+}
+
 int main()
 {
     Game::PlayerController playerController;
@@ -19,18 +31,14 @@ int main()
     playerController.currentRoom = &Map::foyer;
     std::cout << "You are in the " << playerController.currentRoom->name << "." << std::endl;
     std::cout << "Where would you like to go next?" << std::endl;
-    std::map<int, std::string> roomOptions;
-    for (size_t i = 0; i < playerController.currentRoom->adjoiningRooms.size(); ++i)
-    {
-        roomOptions[i] = playerController.currentRoom->adjoiningRooms[i]->name;
-        std::cout << "[" << i << "] " << playerController.currentRoom->adjoiningRooms[i]->name << std::endl;
-    }
+    std::map<int, Game::Room*> rooms = GetAvailableRooms(playerController);
     int playerChoice;
     std::cin >> playerChoice;
-    if (roomOptions.find(playerChoice) != roomOptions.end())
+    if (rooms.find(playerChoice) != rooms.end())
     {
-        playerController.currentRoom = &Map::library;
-        std::cout << "You are in the library" << std::endl;
+        // playerController.currentRoom = &Map::library;
+        playerController.currentRoom = rooms[playerChoice];
+        std::cout << "You are in the " << playerController.currentRoom->name << "." << std::endl;
     }
     else
     {
