@@ -14,11 +14,19 @@ std::map<int, Game::Room*> GetAvailableRooms(const Game::PlayerController& contr
     for (size_t i = 0; i < controller.currentRoom->adjoiningRooms.size(); ++i)
     {
         roomOptions[i] = controller.currentRoom->adjoiningRooms[i];
-        std::cout << "[" << i << "] " << controller.currentRoom->adjoiningRooms[i]->name << std::endl;
     }
 
     return roomOptions;
 }
+
+void PrintAvailableRooms(const std::map<int, Game::Room*>& availableRooms)
+{
+    for (auto const& [index, room] : availableRooms)
+    {
+        std::cout << "[" << index << "] " << room->name << std::endl;
+    }
+}
+
 
 int main()
 {
@@ -32,11 +40,11 @@ int main()
     std::cout << "You are in the " << playerController.currentRoom->name << "." << std::endl;
     std::cout << "Where would you like to go next?" << std::endl;
     std::map<int, Game::Room*> rooms = GetAvailableRooms(playerController);
+    PrintAvailableRooms(rooms);
     int playerChoice;
     std::cin >> playerChoice;
     if (rooms.find(playerChoice) != rooms.end())
     {
-        // playerController.currentRoom = &Map::library;
         playerController.currentRoom = rooms[playerChoice];
         std::cout << "You are in the " << playerController.currentRoom->name << "." << std::endl;
     }
