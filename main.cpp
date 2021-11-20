@@ -9,11 +9,11 @@
 
 #define OUT
 
-void MoveToRoom(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerController controller)
+void MoveToRoom(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerController& controller)
 {
     int playerChoice;
     std::cin >> playerChoice;
-    if (rooms.find(playerChoice) != rooms.end())
+    if (rooms.find(playerChoice) != rooms.end()) // C++20 use .contains
     {
         controller.currentRoom = rooms.at(playerChoice);
         std::cout << "You are in the " << controller.currentRoom->name << ".\n";
@@ -26,6 +26,7 @@ void MoveToRoom(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerControl
 
 int main()
 {
+    bool gameRunning = true;
     Game::PlayerController playerController;
     Game::ChoseCharacter(playerController);
     Game::Wait();
@@ -35,11 +36,12 @@ int main()
     playerController.currentRoom = &Map::foyer;
     std::cout << "You are in the " << playerController.currentRoom->name << ".\n";
     std::cout << "Where would you like to go next?\n";
-    std::map<int, Game::Room*> rooms = Game::GetAvailableRooms(playerController);
-    Game::PrintAvailableRooms(rooms);
-    MoveToRoom(rooms, playerController);
-    Game::Wait();
-        
+    while (gameRunning)
+    {
+        std::map<int, Game::Room*> rooms = Game::GetAvailableRooms(playerController);
+        Game::PrintAvailableRooms(rooms);
+        MoveToRoom(rooms, playerController);
+    }
 
     return 0;
 }

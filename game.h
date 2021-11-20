@@ -31,6 +31,7 @@ namespace Game{
         Character* character;
         Room* currentRoom;
     };
+
     std::map<int, Game::Room*> GetAvailableRooms(const Game::PlayerController& controller)
     {
         std::map<int, Game::Room*> roomOptions;
