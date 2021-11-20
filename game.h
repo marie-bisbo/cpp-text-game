@@ -47,8 +47,9 @@ namespace Game{
     {
         for (auto const& [index, room] : availableRooms)
         {
-            std::cout << "[" << index << "] " << room->name << '\n';
+            std::cout << "[" << index << "] " << "Go to " << room->name << '\n';
         }
+        std::cout << "[" << availableRooms.size() << "] Explore Room\n";
     }
 
     void Wait()

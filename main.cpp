@@ -9,6 +9,21 @@
 
 #define OUT
 
+void ExploreRoom(Game::PlayerController& controller);
+void MoveToRoom(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerController& controller);
+void EnterRoom();
+
+void EnterRoom()
+{
+    // To do later
+    // If there are enemies, combat starts
+    // When all enemies are dead, options are move to different room or explore
+
+    // To do now 
+    // MoveToRoom lists out options for moving to other rooms 
+    // An extra option is to explore the room
+}
+
 void MoveToRoom(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerController& controller)
 {
     int playerChoice;
@@ -18,9 +33,19 @@ void MoveToRoom(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerControl
         controller.currentRoom = rooms.at(playerChoice);
         std::cout << "You are in the " << controller.currentRoom->name << ".\n";
     }
+    else if (playerChoice == rooms.size())
+        ExploreRoom(controller);
     else
+        std::cout << "Oops, seems like you can't do that\n";
+}
+
+void ExploreRoom(Game::PlayerController& controller)
+{
+    std::vector<Item> itemsInRoom = controller.currentRoom->items;
+    for (const auto& item : itemsInRoom)
     {
-        std::cout << "You did not choose a valid room\n";
+        std::cout << item.name << '\n';
+        std::cout << item.description << '\n';
     }
 }
 
