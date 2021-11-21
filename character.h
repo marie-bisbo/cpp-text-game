@@ -15,6 +15,8 @@ public:
     Character();
 
     Character(std::string name, std::vector<Item> inventory, Item weapon);
+
+    void AddItemToInventory(const Item& item);
 };
 
 class Fighter : public Character

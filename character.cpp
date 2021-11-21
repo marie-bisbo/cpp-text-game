@@ -7,10 +7,14 @@
 Character::Character(std::string name, std::vector<Item> inventory, Item weapon)
     : m_Name(name), m_Inventory(inventory), m_Weapon(weapon) 
     {
-        m_Inventory.reserve(10);
+        m_Inventory.reserve(20);
         m_Inventory.push_back(weapon);
     }
 
+void Character::AddItemToInventory(const Item& item)
+{
+    m_Inventory.emplace_back(item);
+}
 
 Fighter::Fighter(std::string name, std::vector<Item> inventory, Item weapon) 
     : Character(name, inventory, weapon)

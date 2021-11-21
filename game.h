@@ -23,6 +23,11 @@ namespace Game{
         std::string name;
         std::vector<Item> items;
         std::vector<Room*> adjoiningRooms;
+
+        void RemoveItemsFromRoom()
+        {
+            // Remove all items. Set vector to null? 
+        }
     };
 
     struct PlayerController

@@ -47,6 +47,8 @@ void ExploreRoom(Game::PlayerController& controller)
         std::cout << item.name << '\n';
         std::cout << item.description << '\n';
     }
+
+    // Add items to inventory and remove from room
 }
 
 int main()
