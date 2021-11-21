@@ -20,11 +20,10 @@ void EnterRoom()
     // When all enemies are dead, options are move to different room or explore
 
     // To do now 
-    // MoveToRoom lists out options for moving to other rooms 
-    // An extra option is to explore the room
+    // ChooseNextAction();
 }
 
-void MoveToRoom(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerController& controller)
+void ChooseNextAction(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerController& controller)
 {
     int playerChoice;
     std::cin >> playerChoice;
@@ -67,7 +66,7 @@ int main()
     {
         std::map<int, Game::Room*> rooms = Game::GetAvailableRooms(playerController);
         Game::PrintAvailableRooms(rooms);
-        MoveToRoom(rooms, playerController);
+        ChooseNextAction(rooms, playerController);
     }
 
     return 0;
