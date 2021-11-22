@@ -10,7 +10,7 @@
 #define OUT
 
 void ExploreRoom(Game::PlayerController& controller);
-void MoveToRoom(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerController& controller);
+void ChooseNextAction(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerController& controller);
 void EnterRoom();
 
 void EnterRoom()
