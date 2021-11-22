@@ -27,13 +27,16 @@ void ChooseNextAction(const std::map<int, Game::Room*>& rooms, OUT Game::PlayerC
 {
     int playerChoice;
     std::cin >> playerChoice;
-    if (rooms.find(playerChoice) != rooms.end()) // C++20 use .contains
+    if (rooms.find(playerChoice) != rooms.end()) // C++20 use contains
     {
         controller.currentRoom = rooms.at(playerChoice);
         std::cout << "You are in the " << controller.currentRoom->name << ".\n";
     }
-    else if (playerChoice == rooms.size())
+    else if (playerChoice == rooms.size() && !controller.currentRoom->isExplored)
+    {
         ExploreRoom(controller);
+        controller.currentRoom->isExplored = true;
+    }
     else
         std::cout << "Oops, seems like you can't do that\n";
 }
@@ -45,9 +48,8 @@ void ExploreRoom(Game::PlayerController& controller)
     {
         std::cout << item.name << '\n';
         std::cout << item.description << '\n';
+        controller.character->AddItemToInventory(item);
     }
-
-    // Add items to inventory and remove from room
 }
 
 int main()
@@ -65,7 +67,7 @@ int main()
     while (gameRunning)
     {
         std::map<int, Game::Room*> rooms = Game::GetAvailableRooms(playerController);
-        Game::PrintAvailableRooms(rooms);
+        Game::PrintAvailableOptions(rooms, playerController);
         ChooseNextAction(rooms, playerController);
     }
 

@@ -16,18 +16,14 @@ namespace Game{
     void StartIntro();
     struct Room;
     std::map<int, Game::Room*> GetAvailableRooms();
-    void PrintAvailableRooms();
+    void PrintAvailableOptions(const std::map<int, Game::Room*>& availableRooms, const PlayerController& controller);
 
     struct Room
     {
         std::string name;
         std::vector<Item> items;
         std::vector<Room*> adjoiningRooms;
-
-        void RemoveItemsFromRoom()
-        {
-            // Remove all items. Set vector to null? 
-        }
+        bool isExplored = false;
     };
 
     struct PlayerController
@@ -48,13 +44,14 @@ namespace Game{
         return roomOptions;
     }
 
-    void PrintAvailableRooms(const std::map<int, Game::Room*>& availableRooms)
+    void PrintAvailableOptions(const std::map<int, Game::Room*>& availableRooms, const PlayerController& controller)
     {
         for (auto const& [index, room] : availableRooms)
         {
             std::cout << "[" << index << "] " << "Go to " << room->name << '\n';
         }
-        std::cout << "[" << availableRooms.size() << "] Explore Room\n";
+        if (!controller.currentRoom->isExplored)
+            std::cout << "[" << availableRooms.size() << "] Explore Room\n";
     }
 
     void Wait()
