@@ -10,13 +10,11 @@
 namespace Game{
 
     struct PlayerController;
-    void Wait();
+    static void Wait();
     enum class CharacterType;
-    CharacterType ChoseCharacter();
-    void StartIntro();
+    static CharacterType ChoseCharacter();
+    static void StartIntro();
     struct Room;
-    std::map<int, Game::Room*> GetAvailableRooms();
-    void PrintAvailableOptions(const std::map<int, Game::Room*>& availableRooms, const PlayerController& controller);
 
     struct Room
     {
@@ -33,28 +31,7 @@ namespace Game{
         Room* currentRoom;
     };
 
-    std::map<int, Game::Room*> GetAvailableRooms(const Game::PlayerController& controller)
-    {
-        std::map<int, Game::Room*> roomOptions;
-        for (size_t i = 0; i < controller.currentRoom->adjoiningRooms.size(); ++i)
-        {
-            roomOptions[i] = controller.currentRoom->adjoiningRooms[i];
-        }
-
-        return roomOptions;
-    }
-
-    void PrintAvailableOptions(const std::map<int, Game::Room*>& availableRooms, const PlayerController& controller)
-    {
-        for (auto const& [index, room] : availableRooms)
-        {
-            std::cout << "[" << index << "] " << "Go to " << room->name << '\n';
-        }
-        if (!controller.currentRoom->isExplored)
-            std::cout << "[" << availableRooms.size() << "] Explore Room\n";
-    }
-
-    void Wait()
+    static void Wait()
     {
         std::cout << "Press enter to continue...\n";
         std::cin.ignore();
@@ -67,7 +44,7 @@ namespace Game{
         Mage
     };
 
-    void ChoseCharacter(OUT PlayerController& playerController)
+    static void ChoseCharacter(OUT PlayerController& playerController)
     {
         CharacterType chosenCharacter;
         bool hasChosenCharacter = false;
@@ -106,7 +83,7 @@ namespace Game{
         playerController.character = character;
     }
 
-    void StartIntro()
+    static void StartIntro()
     {
         std::cout << "You have just woken up. Your memory of recent events is gone. You stand before a great castle...\n";
     }
