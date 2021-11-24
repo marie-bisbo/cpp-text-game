@@ -27,7 +27,7 @@ void RoomEvent::ExploreRoom(Game::PlayerController& controller)
     }
 }
 
-void RoomEvent::PrintAvailableOptions()
+void RoomEvent::PrintAvailableActions()
 {
     for (auto const& [index, room] : m_AdjoiningRooms)
     {

@@ -18,6 +18,6 @@ private:
 public:
     RoomEvent(Game::PlayerController& controller);
 
-    void PrintAvailableOptions();
+    void PrintAvailableActions();
     void ChooseNextAction();
 };

@@ -23,7 +23,7 @@ int main()
     while (gameRunning)
     {
         RoomEvent roomEvent = RoomEvent(playerController);
-        roomEvent.PrintAvailableOptions();
+        roomEvent.PrintAvailableActions();
         roomEvent.ChooseNextAction();
     }
 
