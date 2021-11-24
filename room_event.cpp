@@ -16,14 +16,14 @@ std::map<int, Game::Room*> RoomEvent::GetAdjoiningRooms() const
     return roomOptions;
 }
 
-void RoomEvent::ExploreRoom(Game::PlayerController& controller)
+void RoomEvent::ExploreRoom()
 {
-    std::vector<Item> itemsInRoom = controller.currentRoom->items;
+    std::vector<Item> itemsInRoom = m_Controller.currentRoom->items;
     for (const auto& item : itemsInRoom)
     {
         std::cout << item.name << '\n';
         std::cout << item.description << '\n';
-        controller.character->AddItemToInventory(item);
+        m_Controller.character->AddItemToInventory(item);
     }
 }
 
@@ -48,7 +48,7 @@ void RoomEvent::ChooseNextAction()
     }
     else if (playerChoice == m_AdjoiningRooms.size() && !m_Controller.currentRoom->isExplored)
     {
-        ExploreRoom(m_Controller);
+        ExploreRoom();
         m_Controller.currentRoom->isExplored = true;
     }
     else

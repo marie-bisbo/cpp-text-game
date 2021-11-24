@@ -13,7 +13,7 @@ private:
 
     std::map<int, Game::Room*> GetAdjoiningRooms() const;
 
-    void ExploreRoom(Game::PlayerController& controller);
+    void ExploreRoom();
 
 public:
     RoomEvent(Game::PlayerController& controller);
